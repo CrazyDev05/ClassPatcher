@@ -1,5 +1,7 @@
-package de.crazydev22.classpatcher;
+package de.crazydev22.classpatcher.api;
 
+import javassist.ClassClassPath;
+import javassist.ClassPool;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 
@@ -11,6 +13,26 @@ import java.util.concurrent.TimeoutException;
 public class ClassInstrumentation {
     private static final CountDownLatch latch = new CountDownLatch(1);
     private static volatile Instrumentation instrumentation;
+    private static PatchTransformer patchTransformer;
+
+    public static ClassPool buildPool() {
+        ClassPool pool = new ClassPool();
+        pool.appendSystemPath();
+        for (Class<?> clazz : getInstrumentation().getAllLoadedClasses())
+            pool.appendClassPath(new ClassClassPath(clazz));
+        return pool;
+    }
+
+    public static PatchTransformer getPatchTransformer() {
+        if (patchTransformer != null)
+            return patchTransformer;
+
+        var instrumentation = getInstrumentation();
+        var transformer = new PatchTransformer();
+        instrumentation.addTransformer(transformer, true);
+        patchTransformer = transformer;
+        return transformer;
+    }
 
     @SneakyThrows
     public static Instrumentation getInstrumentation() {

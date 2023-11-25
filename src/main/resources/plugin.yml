@@ -4,3 +4,7 @@ main: de.crazydev22.classpatcher.ClassPatcher
 api-version: '1.20'
 load: STARTUP
 authors: [CrazyDev22]
+
+commands:
+  cprl:
+    permission: "classpatcher.reload"
