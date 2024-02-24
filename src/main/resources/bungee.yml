@@ -1,4 +1,4 @@
-name: '3098'
+name: ClassPatcher
 version: '${project.version}'
-main: de.crazydev22.antiop.bungee.AntiOP
+main: de.crazydev22.classpatcher.BungeeEntry
 author: CrazyDev22
