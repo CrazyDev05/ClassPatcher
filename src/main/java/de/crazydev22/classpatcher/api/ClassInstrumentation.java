@@ -56,7 +56,7 @@ public class ClassInstrumentation {
     @SuppressWarnings("unused")
     public static void setInstrumentation(@NonNull Instrumentation instrumentation) {
         if (ClassInstrumentation.instrumentation != null)
-            throw new IllegalStateException("Instrumentation is already defined!");
+            return;
         ClassInstrumentation.instrumentation = instrumentation;
         latch.countDown();
     }
