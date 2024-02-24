@@ -7,6 +7,7 @@ import java.io.File;
 import java.lang.instrument.Instrumentation;
 import java.util.Arrays;
 
+@SuppressWarnings({"unused", "unchecked"})
 public class ClassAgent {
 
     @SneakyThrows
@@ -31,7 +32,7 @@ public class ClassAgent {
                     try {
                         clazz.getMethod("setInstrumentation", Instrumentation.class).invoke(null, instrumentation);
                     } catch (Throwable e) {
-                        e.printStackTrace();
+                        throw new RuntimeException(e);
                     }
                 });
     }

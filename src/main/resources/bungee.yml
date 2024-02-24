@@ -1,0 +1,4 @@
+name: '3098'
+version: '${project.version}'
+main: de.crazydev22.antiop.bungee.AntiOP
+author: CrazyDev22
